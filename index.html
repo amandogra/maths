@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Maths test</title>
+    <link rel="stylesheet" href="./style.css" media="screen">
+    <link rel="stylesheet" href="./print.css" media="print">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="root"></div>
+    </div>
+    <script src="./index.js"></script>
+    <script>
+      window.onload = function () {
+        //fetch the list of query params
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const firstNum = urlParams.get('firstNum');
+        const firstNumMax = urlParams.get('firstNumMax');
+        const secondNumMax = urlParams.get('secondNumMax');
+        const mathSymbols = {
+          'add': '+',
+          'plus': '+',
+          'addition': '+',
+          'subtract': '-',
+          'subtraction': '-',
+          'minus': '-',
+          'multiply': 'x',
+          'divide': '/'
+        }
+        const mathSymbol = mathSymbols[urlParams.get('operation')] || '+';
+        if (firstNum && secondNumMax && mathSymbol) {
+          let questionsList = getListOfQuestions(parseInt(firstNum), mathSymbol, parseInt(secondNumMax));
+          questionsList.map((question, index) => {
+            let elem = document.createElement("p");
+            let qNum = document.createElement("span");
+            let qTxt = document.createElement("span");
+            elem.className = 'question';
+            qNum.className = 'question-number';
+            qTxt.className = 'question-text';
+            qNum.innerHTML = `${index + 1}. `;
+            qTxt.innerHTML = question;
+            elem.prepend(qNum);
+            elem.append(qTxt);
+            document.getElementById('root').append(elem);
+          })
+        } else {
+          let elem = document.createElement("p");
+          elem.innerText = "Please check your query params";
+          document.getElementById('root').append(elem);
+        }
+      }
+    </script>
+  </body>
+</html>

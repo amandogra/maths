@@ -1,0 +1,33 @@
+body {
+  background: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+.wrapper {
+  background: white;
+  border: #d3d3d3;
+  margin: 0 auto;
+  padding: 0 22px;
+  max-width: 960px;
+  width: 100%;
+}
+#root {
+  display: flex;
+  flex-flow: row wrap;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+}
+
+.question {
+  height: 40px;
+  width: 20%;
+}
+@media only screen and (max-width: 768px) {
+.question {
+  width: 50%;
+}
+}
+
+.question-number {
+  font-weight: bold;
+}
