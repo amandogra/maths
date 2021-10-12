@@ -16,9 +16,9 @@
         //fetch the list of query params
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const firstNum = urlParams.get('firstNum');
-        const firstNumMax = urlParams.get('firstNumMax');
-        const secondNumMax = urlParams.get('secondNumMax');
+        const firstNum = urlParams.get('firstNum') || null;
+        const firstNumMax = urlParams.get('firstNumMax') || null;
+        const secondNumMax = urlParams.get('secondNumMax') || null;
         const mathSymbols = {
           'add': '+',
           'plus': '+',
@@ -30,8 +30,8 @@
           'divide': '/'
         }
         const mathSymbol = mathSymbols[urlParams.get('operation')] || '+';
-        if (firstNum && secondNumMax && mathSymbol) {
-          let questionsList = getListOfQuestions(parseInt(firstNum), mathSymbol, parseInt(secondNumMax));
+        if ((firstNum || firstNumMax) && secondNumMax && mathSymbol) {
+          let questionsList = getListOfQuestions(parseInt(firstNum), mathSymbol, parseInt(secondNumMax), parseInt(firstNumMax));
           questionsList.map((question, index) => {
             let elem = document.createElement("p");
             let qNum = document.createElement("span");
